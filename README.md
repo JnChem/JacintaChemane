@@ -1,102 +1,80 @@
+# 🚀 Portfólio Pessoal
+
+Portfólio trilingue (Português, Inglês e Espanhol) desenvolvido com [Astro](https://astro.build/) e Tailwind CSS, um framework moderno para sites estáticos rápidos e otimizados.
+
+## 🛠️ Tecnologias
+
+- [Astro](https://astro.build/)
+- HTML5
+- CSS3
+- JavaScript
+- Tailwind CSS
+
+## 📁 Estrutura do Projeto
+
+```
+portfolio/
+├── src/
+│   ├── components/
+│   │   ├── Header.astro      # Navegação com toggles de idioma/tema
+│   │   ├── Footer.astro      # Rodapé com tech stack
+│   ├── layouts/
+│   │   └── Layout.astro      # Layout base com scripts globais
+│   ├── pages/
+│   │   ├── index.astro       # Página inicial com perfil
+│   │   ├── work.astro        # Linha do tempo de experiência profissional
+│   │   ├── projects.astro    # Vitrine de projetos
+│   │   └── contact.astro     # Informações de contacto
+│   ├── assets/
+│   │   ├── photo.jpeg        # Foto de perfil
+│   │   ├── Astro_dark.svg    # Logo do Astro (escuro)
+│   │   ├── Astro_light.svg   # Logo do Astro (claro)
+│   │   └── tailwindcss.svg   # Logo do Tailwind CSS
+│   └── styles/
+│       └── global.css        # Animações e utilitários personalizados
+├── public/
+│   └── favicon.svg           # Favicon do site
+├── astro.config.mjs          # Configuração do Astro
+├── tailwind.config.mjs       # Configuração do Tailwind CSS
+├── tsconfig.json             # Configuração do TypeScript
+└── package.json              # Dependências do projeto
+```
+
+## 🚀 Como rodar localmente
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/seu-usuario/seu-repositorio.git
+```
+
+2. Instale as dependências:
+```bash
+npm install
+```
+
+3. Inicie o servidor de desenvolvimento:
+```bash
+npm run dev
+```
+
+4. Acesse no browser: `http://localhost:4321`
+
+## 📦 Build para produção
+
+```bash
+npm run build
+```
+
+## 🌐 Deploy
+
+Este projeto está hospedado na [Netlify](https://www.netlify.com/) / [Vercel](https://vercel.com/).
+
+## 📬 Contato
+
+- LinkedIn: [seu-linkedin](https://linkedin.com)
+- GitHub: [seu-github](https://github.com)
+- Email: seuemail@email.com
+
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 
-const translations = {
-	getInTouch: { en: 'Get in Touch', es: 'Contactar', pt: 'Contacto' },
-	letConnect: { en: "Let's Connect", es: 'Conectemos', pt: 'Vamos Conectar' },
-	description: { en: "I am available and ready for new professional opportunities. Feel free to reach out.", es: 'Estoy disponible y lista para nuevas oportunidades profesionales. No dudes en contactarme.', pt: 'Estou disponível e pronta para novas oportunidades profissionais. Não hesites em entrar em contacto.' },
-	connectElsewhere: { en: 'Connect Elsewhere', es: 'Conéctate en otros lugares', pt: 'Outras Plataformas' },
-	description2: { en: "Feel free to reach out through any of these platforms. I'm always open to discussing new projects, creative ideas, or opportunities.", es: 'Siéntete libre de contactarme a través de cualquiera de estas plataformas.', pt: 'Fique à vontade para entrar em contacto através de qualquer uma destas plataformas. Estou sempre disponível para novas oportunidades.' },
-	contactInfo: { en: 'Contact Info', es: 'Información de Contacto', pt: 'Informações de Contacto' }
-};
-
-const socialLinks = [
-	{ name: 'GitHub', icon: 'M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z', href: 'https://github.com/jacintachemane' },
-	{ name: 'LinkedIn', icon: 'M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z', href: 'https://linkedin.com/in/jacintachemane' },
-	{ name: 'Email', icon: 'M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z', href: 'mailto:jacinta.n.chemane@gmail.com' },
-	{ name: 'Phone', icon: 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z', href: 'tel:+258847011318' }
-];
----
-
-<Layout title="Contact | Jacinta Chemane">
-	<Header />
-	
-	<main class="min-h-screen px-4 sm:px-6 md:px-6">
-		<section class="max-w-3xl mx-auto min-h-[calc(100vh-5rem)] pt-24 sm:pt-32 md:pt-48 pb-16 sm:pb-24 fade-in px-2 sm:px-0">
-			<div class="max-w-2xl mb-12 sm:mb-16">
-				<p class="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400 mb-3 sm:mb-4 tracking-wider uppercase" data-en={translations.getInTouch.en} data-es={translations.getInTouch.es} data-pt={translations.getInTouch.pt}>{translations.getInTouch.pt}</p>
-				<h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white" data-en={translations.letConnect.en} data-es={translations.letConnect.es} data-pt={translations.letConnect.pt}>
-					{translations.letConnect.pt}
-				</h1>
-				<p class="mt-3 sm:mt-4 text-sm sm:text-lg text-gray-600 dark:text-gray-400" data-en={translations.description.en} data-es={translations.description.es} data-pt={translations.description.pt}>
-					{translations.description.pt}
-				</p>
-			</div>
-
-			<div class="parallax-section">
-				<h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-6 sm:mb-8" data-en={translations.connectElsewhere.en} data-es={translations.connectElsewhere.es} data-pt={translations.connectElsewhere.pt}>{translations.connectElsewhere.pt}</h2>
-				<p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-6 sm:mb-8 leading-relaxed" data-en={translations.description2.en} data-es={translations.description2.es} data-pt={translations.description2.pt}>
-					{translations.description2.pt}
-				</p>
-				<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-					{socialLinks.map((social) => (
-						<a href={social.href} target="_blank" rel="noopener noreferrer" class="animated-border cursor-pointer flex items-center gap-3 p-3 sm:p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-900 dark:hover:border-gray-500 transition-all hover:scale-105 group">
-							<svg class="w-5 sm:w-6 h-5 sm:h-6 text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white transition-colors flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
-								<path d={social.icon}/>
-							</svg>
-							<span class="text-xs sm:text-sm font-medium text-gray-900 dark:text-white">{social.name}</span>
-						</a>
-					))}
-				</div>
-
-				<div class="mt-8 sm:mt-12 p-4 sm:p-6 rounded-xl bg-transparent border border-gray-200 dark:border-gray-700">
-					<h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4" data-en={translations.contactInfo.en} data-es={translations.contactInfo.es} data-pt={translations.contactInfo.pt}>{translations.contactInfo.pt}</h3>
-					<div class="space-y-2 sm:space-y-3">
-						<div class="flex items-center gap-2 sm:gap-3">
-							<svg class="w-4 sm:w-5 h-4 sm:h-5 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-							</svg>
-							<span class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">jacinta.n.chemane@gmail.com</span>
-						</div>
-						<div class="flex items-center gap-2 sm:gap-3">
-							<svg class="w-4 sm:w-5 h-4 sm:h-5 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-							</svg>
-							<span class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">+258 847011318 / 864693961</span>
-						</div>
-						<div class="flex items-center gap-2 sm:gap-3">
-							<svg class="w-4 sm:w-5 h-4 sm:h-5 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-							</svg>
-							<span class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Mocuba, Zambézia, Moçambique</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	</main>
-
-	<Footer />
-
-	<script>
-		document.addEventListener('DOMContentLoaded', () => {
-			const observer = new IntersectionObserver((entries) => {
-				entries.forEach(entry => {
-					if (entry.isIntersecting) entry.target.classList.add('visible');
-				});
-			}, { threshold: 0.1 });
-
-			document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-			window.addEventListener('scroll', () => {
-				const scrolled = window.pageYOffset;
-				document.querySelectorAll('.parallax-section').forEach(section => {
-					(section as HTMLElement).style.transform = `translateY(${scrolled * 0.05}px)`;
-				});
-			});
-		});
-	</script>
-</Layout>
+Feito com ❤️ por **Jacinta Chemane**
