@@ -67,13 +67,14 @@ npm run build
 
 ## 🌐 Deploy
 
-Este projeto está hospedado na [Netlify](https://www.netlify.com/) / [Vercel](https://vercel.com/).
+Este projeto está hospedado no [Vercel](https://vercel.com/).
+https://jacinta-chemane.vercel.app/
 
 ## 📬 Contato
 
-- LinkedIn: [seu-linkedin](https://linkedin.com)
-- GitHub: [seu-github](https://github.com)
-- Email: seuemail@email.com
+- LinkedIn: [www.linkedin.com/in/jacinta-chemane](https://linkedin.com)
+- GitHub: [https://github.com/JnChem](https://github.com)
+- Email: jacinta.n.chemane@email.com
 
 ---
 
