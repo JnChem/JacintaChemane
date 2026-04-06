@@ -1,0 +1,108 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const translations = {
+    subtitle: { en: 'My Journey', es: 'Mi Trayectoria', pt: 'A Minha Jornada' },
+    title: { en: 'Work Experience', es: 'Experiencia Laboral', pt: 'Experiência Profissional' },
+    description: { en: 'A timeline of my professional journey and achievements.', es: 'Una línea de tiempo de mi trayectoria profesional y logros.', pt: 'Uma linha do tempo da minha jornada profissional e conquistas.' }
+};
+
+const workExperience = [
+    {
+        year: '2024 - 2024',
+        yearES: '2024 - 2024',
+        yearPT: '2024 - 2024',
+        title: 'IT Intern',
+        titleES: 'Pasante de TI',
+        titlePT: 'Estagiária de TI',
+        company: 'Direcção Provincial de Migração da Zambézia',
+        description: 'Provided technical support to the institution\'s team. Organized and maintained the IT equipment inventory. Recorded and organized technical documentation. Developed communication and teamwork skills.',
+        descriptionES: 'Brindé apoyo técnico al equipo de la institución. Organicé y mantuve el inventario de equipos de TI. Registré y organicé la documentación técnica. Desarrollé habilidades de comunicación y trabajo en equipo.',
+        descriptionPT: 'Prestei apoio técnico à equipa da instituição. Organizei e mantive o inventário de equipamentos de TI. Registei e organizei a documentação técnica. Desenvolvi habilidades de comunicação e trabalho em equipa.'
+    }
+];
+
+const education = [
+    {
+        year: '2021 - 2025',
+        yearES: '2021 - 2025',
+        yearPT: '2021 - 2025',
+        title: 'Bachelor in Information Technologies',
+        titleES: 'Licenciatura en Tecnologías de la Información',
+        titlePT: 'Licenciatura em Tecnologias de Informação',
+        University: 'Universidade Católica de Moçambique'
+    }
+];
+---
+
+<Layout title="Work | Jacinta Chemane">
+	<Header />
+	
+	<main class="min-h-screen px-4 sm:px-6 md:px-6">
+		<section class="max-w-3xl mx-auto min-h-[calc(100vh-5rem)] pt-24 sm:pt-32 md:pt-48 pb-16 sm:pb-24 fade-in px-2 sm:px-0">
+			<div class="max-w-2xl mb-12 sm:mb-16">
+				<p class="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400 mb-3 sm:mb-4 tracking-wider uppercase" data-en={translations.subtitle.en} data-es={translations.subtitle.es} data-pt={translations.subtitle.pt}>{translations.subtitle.pt}</p>
+				<h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white" data-en={translations.title.en} data-es={translations.title.es} data-pt={translations.title.pt}>
+					{translations.title.pt}
+				</h1>
+				<p class="mt-3 sm:mt-4 text-sm sm:text-lg text-gray-600 dark:text-gray-400" data-en={translations.description.en} data-es={translations.description.es} data-pt={translations.description.pt}>
+					{translations.description.pt}
+				</p>
+			</div>
+
+			<!-- Experiência -->
+			<div class="space-y-8 sm:space-y-12 parallax-section mb-16">
+				{workExperience.map((work) => (
+					<div class="relative pl-6 sm:pl-8 border-l-2 border-gray-200 dark:border-gray-700 group cursor-pointer hover:scale-105 transition-all">
+						<div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-gray-400 dark:bg-gray-500 group-hover:scale-125 transition-transform"></div>
+						<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 gap-2 sm:gap-0">
+							<h3 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white" data-en={work.title} data-es={work.titleES} data-pt={work.titlePT}>{work.titlePT}</h3>
+							<span class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium" data-en={work.year} data-es={work.yearES} data-pt={work.yearPT}>{work.yearPT}</span>
+						</div>
+						<p class="text-sm sm:text-lg text-gray-600 dark:text-gray-400 font-medium mb-2 sm:mb-3">{work.company}</p>
+						<p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed" data-en={work.description} data-es={work.descriptionES} data-pt={work.descriptionPT}>{work.descriptionPT}</p>
+					</div>
+				))}
+			</div>
+
+			<!-- Formação -->
+			<h2 class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-8"
+				data-en="Education" data-es="Formación" data-pt="Formação">Formação</h2>
+			<div class="space-y-8 sm:space-y-12 parallax-section">
+				{education.map((edu) => (
+					<div class="relative pl-6 sm:pl-8 border-l-2 border-gray-200 dark:border-gray-700 group cursor-pointer hover:scale-105 transition-all">
+						<div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-gray-400 dark:bg-gray-500 group-hover:scale-125 transition-transform"></div>
+						<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 gap-2 sm:gap-0">
+							<h3 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white" data-en={edu.title} data-es={edu.titleES} data-pt={edu.titlePT}>{edu.titlePT}</h3>
+							<span class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium" data-en={edu.year} data-es={edu.yearES} data-pt={edu.yearPT}>{edu.yearPT}</span>
+						</div>
+						<p class="text-sm sm:text-lg text-gray-600 dark:text-gray-400 font-medium">{edu.company}</p>
+					</div>
+				))}
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+
+	<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) entry.target.classList.add('visible');
+				});
+			}, { threshold: 0.1 });
+
+			document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+			window.addEventListener('scroll', () => {
+				const scrolled = window.pageYOffset;
+				document.querySelectorAll('.parallax-section').forEach(section => {
+					(section as HTMLElement).style.transform = `translateY(${scrolled * 0.05}px)`;
+				});
+			});
+		});
+	</script>
+</Layout>
