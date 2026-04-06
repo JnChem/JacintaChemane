@@ -68,9 +68,10 @@ npm run build
 ## 🌐 Deploy
 
 Este projeto está hospedado no [Vercel](https://vercel.com/).
-```
+---
 https://jacinta-chemane.vercel.app/
 
+```
 ## 📬 Contato
 
 - LinkedIn: [www.linkedin.com/in/jacinta-chemane](https://linkedin.com)
