@@ -1,46 +1,80 @@
-# Astro Starter Kit: Basics
+# 🚀 Portfólio Pessoal
 
-```sh
-npm create astro@latest -- --template basics
+Portfólio bilingue desenvolvido com [Astro](https://astro.build/) e Tailwind CSS, um framework moderno para sites estáticos rápidos e otimizados.
+
+## 🛠️ Tecnologias
+
+- [Astro](https://astro.build/)
+- HTML5
+- CSS3
+- JavaScript
+- Tailwind CSS
+
+## 📁 Estrutura do Projeto
+
 ```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
+portfolio/
+├── src/
+│   ├── components/
+│   │   ├── Header.astro      # Navegação com toggles de idioma/tema
+│   │   ├── Footer.astro      # Rodapé com tech stack
+│   ├── layouts/
+│   │   └── Layout.astro      # Layout base com scripts globais
+│   ├── pages/
+│   │   ├── index.astro       # Página inicial com perfil
+│   │   ├── work.astro        # Linha do tempo de experiência profissional
+│   │   ├── projects.astro    # Vitrine de projetos
+│   │   └── contact.astro     # Informações de contacto
+│   ├── assets/
+│   │   ├── photo.jpeg        # Foto de perfil
+│   │   ├── Astro_dark.svg    # Logo do Astro (escuro)
+│   │   ├── Astro_light.svg   # Logo do Astro (claro)
+│   │   └── tailwindcss.svg   # Logo do Tailwind CSS
+│   └── styles/
+│       └── global.css        # Animações e utilitários personalizados
 ├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+│   └── favicon.svg           # Favicon do site
+├── astro.config.mjs          # Configuração do Astro
+├── tailwind.config.mjs       # Configuração do Tailwind CSS
+├── tsconfig.json             # Configuração do TypeScript
+└── package.json              # Dependências do projeto
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🚀 Como rodar localmente
 
-## 🧞 Commands
+1. Clone o repositório:
+```bash
+git clone https://github.com/seu-usuario/seu-repositorio.git
+```
 
-All commands are run from the root of the project, from a terminal:
+2. Instale as dependências:
+```bash
+npm install
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+3. Inicie o servidor de desenvolvimento:
+```bash
+npm run dev
+```
 
-## 👀 Want to learn more?
+4. Acesse no browser: `http://localhost:4321`
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 📦 Build para produção
+
+```bash
+npm run build
+```
+
+## 🌐 Deploy
+
+Este projeto está hospedado em [Vercel](https://vercel.com/).
+
+## 📬 Contato
+
+- LinkedIn: [www.linkedin.com/in/jacinta-chemane](https://linkedin.com)
+- GitHub: [https://github.com/JnChem](https://github.com)
+- Email: jacinta.n.chemane@email.com
+
+---
+
+Feito com ❤️ por **Jacinta Chemane**
