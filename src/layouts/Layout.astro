@@ -79,6 +79,22 @@ import '../styles/global.css';
 						(el as HTMLLabelElement).textContent = translation;
 					}
 				});
+
+				// Atualiza links (ex: CV) que mudam consoante o idioma
+				document.querySelectorAll('[data-en-href]').forEach(el => {
+					const translation = el.getAttribute(`data-${lang}-href`);
+					if (translation) {
+						(el as HTMLAnchorElement).href = translation;
+					}
+				});
+
+				// Atualiza o nome do ficheiro a descarregar consoante o idioma
+				document.querySelectorAll('[data-en-download]').forEach(el => {
+					const translation = el.getAttribute(`data-${lang}-download`);
+					if (translation) {
+						(el as HTMLAnchorElement).download = translation;
+					}
+				});
 			};
 
 			window.toggleTheme = () => {
