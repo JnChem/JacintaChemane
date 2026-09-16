@@ -6,38 +6,67 @@ import Footer from '../components/Footer.astro';
 const translations = {
 	subtitle: { en: 'Selected Work', es: 'Trabajos Seleccionados', pt: 'Trabalhos Selecionados' },
 	title: { en: 'Projects', es: 'Proyectos', pt: 'Projetos' },
-	description: { en: 'A collection of projects showcasing my skills in full-stack development.', es: 'Una colección de proyectos que muestran mis habilidades en desarrollo full-stack.', pt: 'Uma coleção de projetos que mostram as minhas competências em desenvolvimento full-stack.' }
+	description: { en: 'A collection of projects showcasing my skills in full-stack development.', es: 'Una colección de proyectos que muestran mis habilidades en desarrollo full-stack.', pt: 'Uma coleção de projetos que mostram as minhas competências em desenvolvimento full-stack.' },
+	comingSoon: { en: 'Coming soon', es: 'Próximamente', pt: 'Em breve' }
 };
 
-const esDescriptions = import.meta.glob('../project-descriptions/*/descripcion.md', { query: '?raw', import: 'default' });
-const enDescriptions = import.meta.glob('../project-descriptions/*/descripcion.en.md', { query: '?raw', import: 'default' });
-const ptDescriptions = import.meta.glob('../project-descriptions/*/descripcion.pt.md', { query: '?raw', import: 'default' });
-
-const projectFolders = Object.keys(esDescriptions).map(path => {
-    const parts = path.split('/');
-    return parts[parts.length - 2];
-});
-
-const projects = await Promise.all(projectFolders.map(async (folder) => {
-    const esPath = `../project-descriptions/${folder}/descripcion.md`;
-    const enPath = `../project-descriptions/${folder}/descripcion.en.md`;
-    const ptPath = `../project-descriptions/${folder}/descripcion.pt.md`;
-
-    const esContent = await esDescriptions[esPath]() as string;
-    const enContent = await enDescriptions[enPath]() as string;
-    const ptContent = ptDescriptions[ptPath] ? await ptDescriptions[ptPath]() as string : enContent;
-
-    const esTitle = esContent.split('\n')[0].replace(/### |# /g, '');
-    const enTitle = enContent.split('\n')[0].replace(/### |# /g, '');
-    const ptTitle = ptContent.split('\n')[0].replace(/### |# /g, '');
-
-    return { slug: folder, name: esTitle, enName: enTitle, ptName: ptTitle };
-}));
+const categories = [
+	{
+		id: 'game-dev',
+		title: { en: 'Game Development', es: 'Desarrollo de Juegos', pt: 'Desenvolvimento de Jogos' },
+		description: {
+			en: 'Interactive games and playful experiments, focused on game logic, mechanics and user experience.',
+			es: 'Juegos interactivos y experimentos lúdicos, centrados en la lógica de juego, las mecánicas y la experiencia de usuario.',
+			pt: 'Jogos interativos e experiências lúdicas, com foco em lógica de jogo, mecânicas e experiência do utilizador.'
+		},
+		icon: '🎮'
+	},
+	{
+		id: 'backend',
+		title: { en: 'Backend', es: 'Backend', pt: 'Backend' },
+		description: {
+			en: 'APIs, databases and server-side logic, with attention to structure, security and performance.',
+			es: 'APIs, bases de datos y lógica del lado del servidor, con atención a la estructura, la seguridad y el rendimiento.',
+			pt: 'APIs, bases de dados e lógica do lado do servidor, com atenção à estrutura, segurança e desempenho.'
+		},
+		icon: '🗄️'
+	},
+	{
+		id: 'web-design',
+		title: { en: 'Web Design', es: 'Diseño Web', pt: 'Web Design' },
+		description: {
+			en: 'Interface and layout work, focused on clean visuals, readability and responsive design.',
+			es: 'Trabajo de interfaz y maquetación, centrado en un diseño limpio, la legibilidad y el diseño responsivo.',
+			pt: 'Trabalho de interface e layout, com foco em visuais limpos, legibilidade e design responsivo.'
+		},
+		icon: '🎨'
+	},
+	{
+		id: 'fullstack',
+		title: { en: 'Full Stack', es: 'Full Stack', pt: 'Full Stack' },
+		description: {
+			en: 'End-to-end applications, from the interface to the database, built as complete working solutions.',
+			es: 'Aplicaciones de extremo a extremo, desde la interfaz hasta la base de datos, construidas como soluciones completas y funcionales.',
+			pt: 'Aplicações de ponta a ponta, da interface à base de dados, construídas como soluções completas e funcionais.'
+		},
+		icon: '⚙️'
+	},
+	{
+		id: 'volunteering',
+		title: { en: 'Volunteering', es: 'Voluntariado', pt: 'Voluntariado' },
+		description: {
+			en: 'Community and educational initiatives, including teaching, outreach and technology awareness activities.',
+			es: 'Iniciativas comunitarias y educativas, incluyendo enseñanza, divulgación y actividades de sensibilización tecnológica.',
+			pt: 'Iniciativas comunitárias e educativas, incluindo ensino, divulgação e atividades de sensibilização para a tecnologia.'
+		},
+		icon: '🤝'
+	}
+];
 ---
 
-<Layout title="Projects | Jacinta de Nascimento Chemane">
+<Layout title="Projects | Jacinta Chemane">
 	<Header />
-	
+
 	<main class="min-h-screen px-4 sm:px-6 md:px-6">
 		<section class="max-w-3xl mx-auto min-h-[calc(100vh-5rem)] pt-24 sm:pt-32 md:pt-48 pb-16 sm:pb-24 fade-in px-2 sm:px-0">
 			<div class="max-w-2xl mb-12 sm:mb-16">
@@ -50,17 +79,28 @@ const projects = await Promise.all(projectFolders.map(async (folder) => {
 				</p>
 			</div>
 
-			<div class="flex flex-col items-center justify-center py-16 sm:py-24 text-center">
-					<h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3"
-					data-en="Coming Soon" data-es="Próximamente" data-pt="Em Breve">
-					Em Breve
-				</h2>
-				<p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 max-w-md"
-					data-en="Projects will be shared here soon. Stay tuned!"
-					data-es="Los proyectos serán compartidos aquí pronto. ¡Estén atentos!"
-					data-pt="Os projetos serão partilhados aqui em breve. Fique atento!">
-					Os projetos serão partilhados aqui em breve. Fique atento!
-				</p>
+			<!-- Categorias de Projetos -->
+			<div class="space-y-6 sm:space-y-8">
+				{categories.map((cat) => (
+					<div id={cat.id} class="group border border-gray-200 dark:border-gray-700 rounded-2xl p-5 sm:p-6 hover:border-gray-400 dark:hover:border-gray-500 hover:shadow-md transition-all">
+						<div class="flex items-start gap-3 sm:gap-4">
+							<span class="text-2xl sm:text-3xl flex-shrink-0 group-hover:scale-110 transition-transform" aria-hidden="true">{cat.icon}</span>
+							<div class="flex-1">
+								<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+									<h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white" data-en={cat.title.en} data-es={cat.title.es} data-pt={cat.title.pt}>
+										{cat.title.pt}
+									</h2>
+									<span class="text-[10px] sm:text-xs font-medium px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 w-fit whitespace-nowrap" data-en={translations.comingSoon.en} data-es={translations.comingSoon.es} data-pt={translations.comingSoon.pt}>
+										{translations.comingSoon.pt}
+									</span>
+								</div>
+								<p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed" data-en={cat.description.en} data-es={cat.description.es} data-pt={cat.description.pt}>
+									{cat.description.pt}
+								</p>
+							</div>
+						</div>
+					</div>
+				))}
 			</div>
 		</section>
 	</main>
@@ -80,6 +120,3 @@ const projects = await Promise.all(projectFolders.map(async (folder) => {
 	</script>
 </Layout>
 
-<style>
-	@reference "../styles/global.css";
-</style>
