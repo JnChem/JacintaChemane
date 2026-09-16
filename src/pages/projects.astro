@@ -7,59 +7,96 @@ const translations = {
 	subtitle: { en: 'Selected Work', es: 'Trabajos Seleccionados', pt: 'Trabalhos Selecionados' },
 	title: { en: 'Projects', es: 'Proyectos', pt: 'Projetos' },
 	description: { en: 'A collection of projects showcasing my skills in full-stack development.', es: 'Una colección de proyectos que muestran mis habilidades en desarrollo full-stack.', pt: 'Uma coleção de projetos que mostram as minhas competências em desenvolvimento full-stack.' },
-	comingSoon: { en: 'Coming soon', es: 'Próximamente', pt: 'Em breve' }
+	comingSoon: { en: 'Coming soon', es: 'Próximamente', pt: 'Em breve' },
+	viewProject: { en: 'View on itch.io', es: 'Ver en itch.io', pt: 'Ver no itch.io' }
 };
+
+// Carrega automaticamente todas as imagens das pastas de cada projeto
+const bowBattlesImages = Object.values(
+	import.meta.glob<{ default: ImageMetadata }>('../assets/projects/bow-battles/*.{png,jpg,jpeg,webp,avif}', { eager: true })
+).map((img) => img.default);
+
+const clagImages = Object.values(
+	import.meta.glob<{ default: ImageMetadata }>('../assets/projects/code-like-a-girl/*.{png,jpg,jpeg,webp,avif}', { eager: true })
+).map((img) => img.default);
 
 const categories = [
 	{
 		id: 'game-dev',
+		icon: '🎮',
 		title: { en: 'Game Development', es: 'Desarrollo de Juegos', pt: 'Desenvolvimento de Jogos' },
 		description: {
 			en: 'Interactive games and playful experiments, focused on game logic, mechanics and user experience.',
 			es: 'Juegos interactivos y experimentos lúdicos, centrados en la lógica de juego, las mecánicas y la experiencia de usuario.',
 			pt: 'Jogos interativos e experiências lúdicas, com foco em lógica de jogo, mecânicas e experiência do utilizador.'
 		},
-		icon: '🎮'
+		projects: [
+			{
+				name: 'Bow Battles',
+				link: 'https://itch.io',
+				images: bowBattlesImages,
+				description: {
+					en: '2D fantasy game with 12 stages where the goal is to defeat the bosses. Includes a shop, menu, level system, sound system, 9 purchasable characters, movement, attack and revive mechanics. Released on itch.io.',
+					es: 'Juego de fantasía 2D con 12 niveles cuyo objetivo es derrotar a los jefes. Incluye tienda, menú, sistema de niveles, sistema de sonido, 9 personajes comprables, movimiento, ataque y mecánica de resurrección. Publicado en itch.io.',
+					pt: 'Jogo 2D de fantasia com 12 níveis, cujo objetivo é derrotar os bosses. Inclui loja, menu, sistema de níveis, sistema de som, 9 personagens compráveis, movimentação, ataque e sistema de reviver. Lançado no itch.io.'
+				}
+			}
+		]
 	},
 	{
 		id: 'backend',
+		icon: '🗄️',
 		title: { en: 'Backend', es: 'Backend', pt: 'Backend' },
 		description: {
 			en: 'APIs, databases and server-side logic, with attention to structure, security and performance.',
 			es: 'APIs, bases de datos y lógica del lado del servidor, con atención a la estructura, la seguridad y el rendimiento.',
 			pt: 'APIs, bases de dados e lógica do lado do servidor, com atenção à estrutura, segurança e desempenho.'
 		},
-		icon: '🗄️'
+		projects: []
 	},
 	{
 		id: 'web-design',
+		icon: '🎨',
 		title: { en: 'Web Design', es: 'Diseño Web', pt: 'Web Design' },
 		description: {
 			en: 'Interface and layout work, focused on clean visuals, readability and responsive design.',
 			es: 'Trabajo de interfaz y maquetación, centrado en un diseño limpio, la legibilidad y el diseño responsivo.',
 			pt: 'Trabalho de interface e layout, com foco em visuais limpos, legibilidade e design responsivo.'
 		},
-		icon: '🎨'
+		projects: []
 	},
 	{
 		id: 'fullstack',
+		icon: '⚙️',
 		title: { en: 'Full Stack', es: 'Full Stack', pt: 'Full Stack' },
 		description: {
 			en: 'End-to-end applications, from the interface to the database, built as complete working solutions.',
 			es: 'Aplicaciones de extremo a extremo, desde la interfaz hasta la base de datos, construidas como soluciones completas y funcionales.',
 			pt: 'Aplicações de ponta a ponta, da interface à base de dados, construídas como soluções completas e funcionais.'
 		},
-		icon: '⚙️'
+		projects: []
 	},
 	{
 		id: 'volunteering',
+		icon: '🤝',
 		title: { en: 'Volunteering', es: 'Voluntariado', pt: 'Voluntariado' },
 		description: {
 			en: 'Community and educational initiatives, including teaching, outreach and technology awareness activities.',
 			es: 'Iniciativas comunitarias y educativas, incluyendo enseñanza, divulgación y actividades de sensibilización tecnológica.',
 			pt: 'Iniciativas comunitárias e educativas, incluindo ensino, divulgação e atividades de sensibilização para a tecnologia.'
 		},
-		icon: '🤝'
+		projects: [
+			{
+				name: 'Code Like A Girl',
+				link: null,
+				images: clagImages,
+				description: {
+					en: 'Volunteer programming trainer for young girls, teaching coding fundamentals and adapting explanations to each participant\'s pace, encouraging confidence and interest in technology.',
+					es: 'Formadora voluntaria de programación para niñas, enseñando los fundamentos de la programación y adaptando las explicaciones al ritmo de cada participante, fomentando la confianza y el interés por la tecnología.',
+					pt: 'Formadora voluntária de programação para meninas, ensinando fundamentos de código e adaptando as explicações ao ritmo de cada participante, incentivando a confiança e o interesse pela tecnologia.'
+				}
+			}
+		]
 	}
 ];
 ---
@@ -79,26 +116,73 @@ const categories = [
 				</p>
 			</div>
 
-			<!-- Categorias de Projetos -->
-			<div class="space-y-6 sm:space-y-8">
+			<!-- Categorias -->
+			<div class="space-y-10 sm:space-y-14">
 				{categories.map((cat) => (
-					<div id={cat.id} class="group border border-gray-200 dark:border-gray-700 rounded-2xl p-5 sm:p-6 hover:border-gray-400 dark:hover:border-gray-500 hover:shadow-md transition-all">
-						<div class="flex items-start gap-3 sm:gap-4">
-							<span class="text-2xl sm:text-3xl flex-shrink-0 group-hover:scale-110 transition-transform" aria-hidden="true">{cat.icon}</span>
+					<div id={cat.id} class="scroll-mt-28">
+						<!-- Cabeçalho da categoria -->
+						<div class="flex items-start gap-3 mb-4 sm:mb-5 pb-3 border-b border-gray-200 dark:border-gray-700">
+							<span class="text-2xl sm:text-3xl flex-shrink-0" aria-hidden="true">{cat.icon}</span>
 							<div class="flex-1">
-								<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
-									<h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white" data-en={cat.title.en} data-es={cat.title.es} data-pt={cat.title.pt}>
+								<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5">
+									<h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white" data-en={cat.title.en} data-es={cat.title.es} data-pt={cat.title.pt}>
 										{cat.title.pt}
 									</h2>
-									<span class="text-[10px] sm:text-xs font-medium px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 w-fit whitespace-nowrap" data-en={translations.comingSoon.en} data-es={translations.comingSoon.es} data-pt={translations.comingSoon.pt}>
-										{translations.comingSoon.pt}
-									</span>
+									{cat.projects.length === 0 && (
+										<span class="text-[10px] sm:text-xs font-medium px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 w-fit whitespace-nowrap" data-en={translations.comingSoon.en} data-es={translations.comingSoon.es} data-pt={translations.comingSoon.pt}>
+											{translations.comingSoon.pt}
+										</span>
+									)}
 								</div>
-								<p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed" data-en={cat.description.en} data-es={cat.description.es} data-pt={cat.description.pt}>
+								<p class="mt-1 text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed" data-en={cat.description.en} data-es={cat.description.es} data-pt={cat.description.pt}>
 									{cat.description.pt}
 								</p>
 							</div>
 						</div>
+
+						<!-- Projetos da categoria -->
+						{cat.projects.length > 0 && (
+							<div class="space-y-6">
+								{cat.projects.map((project) => (
+									<article class="group border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden hover:border-gray-400 dark:hover:border-gray-500 hover:shadow-lg transition-all">
+										{project.images.length > 0 && (
+											<div class="project-gallery">
+												{project.images.map((img, i) => (
+													<img
+														src={img.src}
+														width={img.width}
+														height={img.height}
+														alt={`${project.name} — ${i + 1}`}
+														loading="lazy"
+														decoding="async"
+														class="project-gallery-img"
+													/>
+												))}
+											</div>
+										)}
+										<div class="p-5 sm:p-6">
+											<h3 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-2">{project.name}</h3>
+											<p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed" data-en={project.description.en} data-es={project.description.es} data-pt={project.description.pt}>
+												{project.description.pt}
+											</p>
+											{project.link && (
+												<a
+													href={project.link}
+													target="_blank"
+													rel="noopener noreferrer"
+													class="animated-border inline-flex items-center gap-2 mt-4 px-4 py-2 text-sm font-medium border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+													data-en={translations.viewProject.en}
+													data-es={translations.viewProject.es}
+													data-pt={translations.viewProject.pt}
+												>
+													{translations.viewProject.pt}
+												</a>
+											)}
+										</div>
+									</article>
+								))}
+							</div>
+						)}
 					</div>
 				))}
 			</div>
@@ -122,4 +206,48 @@ const categories = [
 
 <style>
 	@reference "../styles/global.css";
+
+	.project-gallery {
+		display: flex;
+		gap: 0.5rem;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		padding: 0.5rem;
+		background: rgb(243 244 246);
+		-webkit-overflow-scrolling: touch;
+	}
+
+	:global(html.dark) .project-gallery {
+		background: rgb(17 24 39);
+	}
+
+	.project-gallery::-webkit-scrollbar {
+		height: 6px;
+	}
+
+	.project-gallery::-webkit-scrollbar-thumb {
+		background: rgb(156 163 175 / 0.6);
+		border-radius: 9999px;
+	}
+
+	.project-gallery-img {
+		flex: 0 0 auto;
+		width: 15rem;
+		height: 10rem;
+		object-fit: cover;
+		border-radius: 0.75rem;
+		scroll-snap-align: start;
+		transition: transform 0.3s ease;
+	}
+
+	.project-gallery-img:hover {
+		transform: scale(1.03);
+	}
+
+	@media (max-width: 640px) {
+		.project-gallery-img {
+			width: 12rem;
+			height: 8rem;
+		}
+	}
 </style>
