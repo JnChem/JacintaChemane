@@ -35,11 +35,22 @@ const categories = [
 				date: { en: '2026', es: '2026', pt: '2026' },
 				link: 'https://itch.io',
 				images: bowBattlesImages,
-				description: {
-					en: '2D fantasy game with 12 stages, where the goal is to defeat the boss of each stage. Features: shop, menu, level system, sound system, 9 purchasable characters, movement, attack and revive mechanics. Released on itch.io.',
-					es: 'Juego de fantasía 2D con 12 niveles, cuyo objetivo es derrotar al jefe de cada nivel. Funcionalidades: tienda, menú, sistema de niveles, sistema de sonido, 9 personajes comprables, movimiento, ataque y mecánica de resurrección. Publicado en itch.io.',
-					pt: 'Jogo 2D de fantasia com 12 níveis, cujo objetivo é derrotar o boss de cada nível. Funcionalidades: loja, menu, sistema de níveis, sistema de som, 9 personagens compráveis, movimentação, ataque e sistema de reviver. Lançado no itch.io.'
-				}
+				intro: {
+					en: '2D fantasy game with 12 stages, where the goal is to defeat the boss of each stage. Released on itch.io.',
+					es: 'Juego de fantasía 2D con 12 niveles, cuyo objetivo es derrotar al jefe de cada nivel. Publicado en itch.io.',
+					pt: 'Jogo 2D de fantasia com 12 níveis, cujo objetivo é derrotar o boss de cada nível. Lançado no itch.io.'
+				},
+				featuresLabel: { en: 'Features:', es: 'Funcionalidades:', pt: 'Funcionalidades:' },
+				features: [
+					{ en: 'Shop', es: 'Tienda', pt: 'Loja' },
+					{ en: 'Menu', es: 'Menú', pt: 'Menu' },
+					{ en: 'Level system', es: 'Sistema de niveles', pt: 'Sistema de níveis' },
+					{ en: 'Sound system', es: 'Sistema de sonido', pt: 'Sistema de som' },
+					{ en: '9 purchasable characters', es: '9 personajes comprables', pt: '9 personagens compráveis' },
+					{ en: 'Movement', es: 'Movimiento', pt: 'Movimentação' },
+					{ en: 'Attack', es: 'Ataque', pt: 'Ataque' },
+					{ en: 'Revive mechanic', es: 'Mecánica de resurrección', pt: 'Sistema de reviver' }
+				]
 			}
 		]
 	},
@@ -87,11 +98,19 @@ const categories = [
 				date: { en: '2026', es: '2026', pt: '2026' },
 				link: null,
 				images: clagImages,
-				description: {
-					en: 'Volunteer trainer for the Code Like A Girl program, in partnership with Moz Devz, teaching young girls with no prior contact with technology. Delivered modules on computing fundamentals, the Internet, client-server architecture and the Internet of Things, alongside cybersecurity training focused on safe and conscious online navigation. Introduced web development concepts with HTML, enabling participants to build their first digital projects. Designed and adapted teaching materials to make technical topics accessible, and coordinated practical sessions together with another trainer to keep the training dynamic and effective.',
-					es: 'Formadora voluntaria en el programa Code Like A Girl, en colaboración con Moz Devz, enseñando a niñas sin contacto previo con la tecnología. Impartí módulos sobre fundamentos de informática, Internet, arquitectura cliente-servidor e Internet de las Cosas, además de formación en ciberseguridad centrada en una navegación online segura y consciente. Introduje conceptos de desarrollo web con HTML, permitiendo a las participantes crear sus primeros proyectos digitales. Diseñé y adapté materiales didácticos para hacer accesibles los temas técnicos, y coordiné sesiones prácticas junto a otro formador para mantener la formación dinámica y eficaz.',
-					pt: 'Formadora voluntária no programa Code Like A Girl, em parceria com a Moz Devz, ensinando meninas sem contacto prévio com a tecnologia. Leccionei módulos de informática, Internet, arquitetura cliente-servidor e Internet das Coisas, além de formação em segurança cibernética focada em navegação online consciente e protegida. Introduzi conceitos de desenvolvimento web com HTML, permitindo às formandas criar os seus primeiros projetos digitais. Concebi e adaptei conteúdos didáticos para tornar os temas técnicos acessíveis, e coordenei sessões práticas em conjunto com outro formador, garantindo dinamismo e eficácia na formação.'
-				}
+				intro: {
+					en: 'Volunteer trainer for the Code Like A Girl program, in partnership with Moz Devz, teaching young girls with no prior contact with technology.',
+					es: 'Formadora voluntaria en el programa Code Like A Girl, en colaboración con Moz Devz, enseñando a niñas sin contacto previo con la tecnología.',
+					pt: 'Formadora voluntária no programa Code Like A Girl, em parceria com a Moz Devz, ensinando meninas sem contacto prévio com a tecnologia.'
+				},
+				featuresLabel: { en: 'What I did:', es: 'Lo que hice:', pt: 'O que fiz:' },
+				features: [
+					{ en: 'Taught computing fundamentals, the Internet, client-server architecture and the Internet of Things', es: 'Impartí fundamentos de informática, Internet, arquitectura cliente-servidor e Internet de las Cosas', pt: 'Leccionei módulos de informática, Internet, arquitetura cliente-servidor e Internet das Coisas' },
+					{ en: 'Delivered cybersecurity training for safe and conscious online navigation', es: 'Formación en ciberseguridad para una navegación online segura y consciente', pt: 'Formação em segurança cibernética para navegação online consciente e protegida' },
+					{ en: 'Introduced web development with HTML for first digital projects', es: 'Introduje desarrollo web con HTML para los primeros proyectos digitales', pt: 'Introdução ao desenvolvimento web com HTML para os primeiros projetos digitais' },
+					{ en: 'Designed and adapted teaching materials for beginners', es: 'Diseño y adaptación de materiales didácticos para principiantes', pt: 'Conceção e adaptação de conteúdos didáticos para iniciantes' },
+					{ en: 'Coordinated practical sessions with another trainer', es: 'Coordinación de sesiones prácticas junto a otro formador', pt: 'Coordenação de sessões práticas em conjunto com outro formador' }
+				]
 			}
 		]
 	}
@@ -166,9 +185,21 @@ const categories = [
 													))}
 												</div>
 											)}
-											<p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed mt-3" data-en={project.description.en} data-es={project.description.es} data-pt={project.description.pt}>
-												{project.description.pt}
+											<p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed mt-3" data-en={project.intro.en} data-es={project.intro.es} data-pt={project.intro.pt}>
+												{project.intro.pt}
 											</p>
+											{project.features && project.features.length > 0 && (
+												<div class="mt-3">
+													<p class="text-sm sm:text-base font-semibold text-gray-900 dark:text-white mb-1.5" data-en={project.featuresLabel.en} data-es={project.featuresLabel.es} data-pt={project.featuresLabel.pt}>
+														{project.featuresLabel.pt}
+													</p>
+													<ul class="feature-list">
+														{project.features.map((feature) => (
+															<li data-en={feature.en} data-es={feature.es} data-pt={feature.pt}>{feature.pt}</li>
+														))}
+													</ul>
+												</div>
+											)}
 											{project.link && (
 												<a
 													href={project.link}
@@ -276,6 +307,26 @@ const categories = [
 
 	.project-drawer[open] .project-content {
 		animation: drawer-open 0.25s ease;
+	}
+
+	.feature-list {
+		list-style: disc;
+		padding-left: 1.25rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.35rem;
+		font-size: 0.875rem;
+		color: rgb(75 85 99);
+	}
+
+	:global(html.dark) .feature-list {
+		color: rgb(156 163 175);
+	}
+
+	@media (min-width: 640px) {
+		.feature-list {
+			font-size: 1rem;
+		}
 	}
 
 	.project-gallery {
