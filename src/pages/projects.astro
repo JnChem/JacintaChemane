@@ -23,7 +23,6 @@ const clagImages = Object.values(
 const categories = [
 	{
 		id: 'game-dev',
-		icon: '🎮',
 		title: { en: 'Game Development', es: 'Desarrollo de Juegos', pt: 'Desenvolvimento de Jogos' },
 		description: {
 			en: 'Interactive games and playful experiments, focused on game logic, mechanics and user experience.',
@@ -46,7 +45,6 @@ const categories = [
 	},
 	{
 		id: 'backend',
-		icon: '🗄️',
 		title: { en: 'Backend', es: 'Backend', pt: 'Backend' },
 		description: {
 			en: 'APIs, databases and server-side logic, with attention to structure, security and performance.',
@@ -57,7 +55,6 @@ const categories = [
 	},
 	{
 		id: 'web-design',
-		icon: '🎨',
 		title: { en: 'Web Design', es: 'Diseño Web', pt: 'Web Design' },
 		description: {
 			en: 'Interface and layout work, focused on clean visuals, readability and responsive design.',
@@ -68,7 +65,6 @@ const categories = [
 	},
 	{
 		id: 'fullstack',
-		icon: '⚙️',
 		title: { en: 'Full Stack', es: 'Full Stack', pt: 'Full Stack' },
 		description: {
 			en: 'End-to-end applications, from the interface to the database, built as complete working solutions.',
@@ -79,7 +75,6 @@ const categories = [
 	},
 	{
 		id: 'volunteering',
-		icon: '🤝',
 		title: { en: 'Volunteering', es: 'Voluntariado', pt: 'Voluntariado' },
 		description: {
 			en: 'Community and educational initiatives, including teaching, outreach and technology awareness activities.',
@@ -118,91 +113,81 @@ const categories = [
 				</p>
 			</div>
 
-			<!-- Categorias em formato de gaveta (nível 1) -->
-			<div class="space-y-3 sm:space-y-4">
-				{categories.map((cat, index) => (
-					<details id={cat.id} class="category-drawer scroll-mt-28" open={index === 0}>
-						<summary class="category-summary">
-							<span class="text-2xl sm:text-3xl flex-shrink-0" aria-hidden="true">{cat.icon}</span>
-							<div class="flex-1 min-w-0">
-								<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5">
-									<h2 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white" data-en={cat.title.en} data-es={cat.title.es} data-pt={cat.title.pt}>
-										{cat.title.pt}
-									</h2>
-									{cat.projects.length === 0 && (
-										<span class="text-[10px] sm:text-xs font-medium px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 w-fit whitespace-nowrap" data-en={translations.comingSoon.en} data-es={translations.comingSoon.es} data-pt={translations.comingSoon.pt}>
-											{translations.comingSoon.pt}
-										</span>
-									)}
-								</div>
-								<p class="mt-1 text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed" data-en={cat.description.en} data-es={cat.description.es} data-pt={cat.description.pt}>
-									{cat.description.pt}
-								</p>
-							</div>
-							<svg class="chevron-icon flex-shrink-0" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-								<polyline points="6 9 12 15 18 9"></polyline>
-							</svg>
-						</summary>
-
-						<div class="category-content">
-							{cat.projects.length > 0 && (
-								<div class="space-y-3 pt-3">
-									{cat.projects.map((project) => (
-										<!-- Cada projeto é a sua própria gaveta (nível 2) -->
-										<details class="project-drawer">
-											<summary class="project-summary">
-												<div class="flex-1 min-w-0">
-													<div class="flex flex-wrap items-center gap-x-2.5 gap-y-1">
-														<h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">{project.name}</h3>
-														<span class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium" data-en={project.date.en} data-es={project.date.es} data-pt={project.date.pt}>
-															{project.date.pt}
-														</span>
-													</div>
-												</div>
-												<svg class="chevron-icon flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-													<polyline points="6 9 12 15 18 9"></polyline>
-												</svg>
-											</summary>
-
-											<div class="project-content">
-												{project.images.length > 0 && (
-													<div class="project-gallery">
-														{project.images.map((img, i) => (
-															<img
-																src={img.src}
-																width={img.width}
-																height={img.height}
-																alt={`${project.name} — ${i + 1}`}
-																loading="lazy"
-																decoding="async"
-																class="project-gallery-img"
-															/>
-														))}
-													</div>
-												)}
-												<p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed mt-3" data-en={project.description.en} data-es={project.description.es} data-pt={project.description.pt}>
-													{project.description.pt}
-												</p>
-												{project.link && (
-													<a
-														href={project.link}
-														target="_blank"
-														rel="noopener noreferrer"
-														class="animated-border inline-flex items-center gap-2 mt-4 px-4 py-2 text-sm font-medium border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-														data-en={translations.viewProject.en}
-														data-es={translations.viewProject.es}
-														data-pt={translations.viewProject.pt}
-													>
-														{translations.viewProject.pt}
-													</a>
-												)}
-											</div>
-										</details>
-									))}
-								</div>
+			<!-- Categorias: títulos simples, sempre visíveis -->
+			<div class="space-y-10 sm:space-y-14">
+				{categories.map((cat) => (
+					<div id={cat.id} class="scroll-mt-28">
+						<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
+							<h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white" data-en={cat.title.en} data-es={cat.title.es} data-pt={cat.title.pt}>
+								{cat.title.pt}
+							</h2>
+							{cat.projects.length === 0 && (
+								<span class="text-[10px] sm:text-xs font-medium px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 w-fit whitespace-nowrap" data-en={translations.comingSoon.en} data-es={translations.comingSoon.es} data-pt={translations.comingSoon.pt}>
+								{translations.comingSoon.pt}
+							</span>
 							)}
 						</div>
-					</details>
+						<p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed mb-4 sm:mb-5" data-en={cat.description.en} data-es={cat.description.es} data-pt={cat.description.pt}>
+							{cat.description.pt}
+						</p>
+
+						<!-- Projetos: cada um é uma gaveta expansível -->
+						{cat.projects.length > 0 && (
+							<div class="space-y-3">
+								{cat.projects.map((project) => (
+									<details class="project-drawer">
+										<summary class="project-summary">
+											<div class="flex-1 min-w-0">
+												<div class="flex flex-wrap items-center gap-x-2.5 gap-y-1">
+													<h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">{project.name}</h3>
+													<span class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium" data-en={project.date.en} data-es={project.date.es} data-pt={project.date.pt}>
+														{project.date.pt}
+													</span>
+												</div>
+											</div>
+											<svg class="chevron-icon flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+												<polyline points="6 9 12 15 18 9"></polyline>
+											</svg>
+										</summary>
+
+										<div class="project-content">
+											{project.images.length > 0 && (
+												<div class="project-gallery">
+													{project.images.map((img, i) => (
+														<img
+															src={img.src}
+															width={img.width}
+															height={img.height}
+															alt={`${project.name} — ${i + 1}`}
+															loading="lazy"
+															decoding="async"
+															class="project-gallery-img"
+														/>
+													))}
+												</div>
+											)}
+											<p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed mt-3" data-en={project.description.en} data-es={project.description.es} data-pt={project.description.pt}>
+												{project.description.pt}
+											</p>
+											{project.link && (
+												<a
+													href={project.link}
+													target="_blank"
+													rel="noopener noreferrer"
+													class="animated-border inline-flex items-center gap-2 mt-4 px-4 py-2 text-sm font-medium border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+													data-en={translations.viewProject.en}
+													data-es={translations.viewProject.es}
+													data-pt={translations.viewProject.pt}
+												>
+													{translations.viewProject.pt}
+												</a>
+											)}
+										</div>
+									</details>
+								))}
+							</div>
+						)}
+					</div>
 				))}
 			</div>
 		</section>
@@ -226,78 +211,7 @@ const categories = [
 <style>
 	@reference "../styles/global.css";
 
-	/* Gaveta de categoria (nível 1) */
-	.category-drawer {
-		border: 1px solid rgb(229 231 235);
-		border-radius: 1rem;
-		background: white;
-		overflow: hidden;
-		transition: border-color 0.2s ease;
-	}
-
-	:global(html.dark) .category-drawer {
-		border-color: rgb(55 65 81);
-		background: rgb(3 7 18 / 0.4);
-	}
-
-	.category-drawer:hover {
-		border-color: rgb(156 163 175);
-	}
-
-	:global(html.dark) .category-drawer:hover {
-		border-color: rgb(107 114 128);
-	}
-
-	.category-summary {
-		display: flex;
-		align-items: flex-start;
-		gap: 0.75rem;
-		padding: 1.1rem 1.25rem;
-		cursor: pointer;
-		list-style: none;
-	}
-
-	.category-summary::-webkit-details-marker,
-	.project-summary::-webkit-details-marker {
-		display: none;
-	}
-
-	.category-summary::marker,
-	.project-summary::marker {
-		content: '';
-	}
-
-	.chevron-icon {
-		margin-top: 0.35rem;
-		color: rgb(107 114 128);
-		transition: transform 0.3s ease;
-	}
-
-	details[open] > summary .chevron-icon {
-		transform: rotate(180deg);
-	}
-
-	.category-content {
-		padding: 0 1.25rem 1.1rem 1.25rem;
-	}
-
-	@keyframes drawer-open {
-		from {
-			opacity: 0;
-			transform: translateY(-6px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	details[open] > .category-content,
-	details[open] > .project-content {
-		animation: drawer-open 0.25s ease;
-	}
-
-	/* Gaveta de projeto (nível 2) */
+	/* Gaveta de projeto (a única parte expansível) */
 	.project-drawer {
 		border: 1px solid rgb(229 231 235);
 		border-radius: 0.85rem;
@@ -328,8 +242,40 @@ const categories = [
 		list-style: none;
 	}
 
+	.project-summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.project-summary::marker {
+		content: '';
+	}
+
+	.chevron-icon {
+		color: rgb(107 114 128);
+		transition: transform 0.3s ease;
+	}
+
+	.project-drawer[open] .chevron-icon {
+		transform: rotate(180deg);
+	}
+
 	.project-content {
 		padding: 0 1rem 1rem 1rem;
+	}
+
+	@keyframes drawer-open {
+		from {
+			opacity: 0;
+			transform: translateY(-6px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.project-drawer[open] .project-content {
+		animation: drawer-open 0.25s ease;
 	}
 
 	.project-gallery {
