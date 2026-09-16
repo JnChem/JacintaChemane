@@ -33,7 +33,8 @@ const categories = [
 		projects: [
 			{
 				name: 'Bow Battles',
-				link: 'https://itch.io/jacinta-chemane/bow-battles',
+				date: { en: '2026', es: '2026', pt: '2026' },
+				link: 'https://itch.io',
 				images: bowBattlesImages,
 				description: {
 					en: '2D fantasy game with 12 stages where the goal is to defeat the bosses. Includes a shop, menu, level system, sound system, 9 purchasable characters, movement, attack and revive mechanics. Released on itch.io.',
@@ -88,6 +89,7 @@ const categories = [
 		projects: [
 			{
 				name: 'Code Like A Girl',
+				date: { en: '2026', es: '2026', pt: '2026' },
 				link: null,
 				images: clagImages,
 				description: {
@@ -116,10 +118,10 @@ const categories = [
 				</p>
 			</div>
 
-			<!-- Categorias em formato de gaveta (accordion) -->
+			<!-- Categorias em formato de gaveta (nível 1) -->
 			<div class="space-y-3 sm:space-y-4">
 				{categories.map((cat, index) => (
-					<details id={cat.id} class="category-drawer group scroll-mt-28" open={index === 0}>
+					<details id={cat.id} class="category-drawer scroll-mt-28" open={index === 0}>
 						<summary class="category-summary">
 							<span class="text-2xl sm:text-3xl flex-shrink-0" aria-hidden="true">{cat.icon}</span>
 							<div class="flex-1 min-w-0">
@@ -143,28 +145,42 @@ const categories = [
 						</summary>
 
 						<div class="category-content">
-							{cat.projects.length > 0 ? (
-								<div class="space-y-6 pt-4">
+							{cat.projects.length > 0 && (
+								<div class="space-y-3 pt-3">
 									{cat.projects.map((project) => (
-										<article class="border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden hover:border-gray-400 dark:hover:border-gray-500 transition-colors">
-											{project.images.length > 0 && (
-												<div class="project-gallery">
-													{project.images.map((img, i) => (
-														<img
-															src={img.src}
-															width={img.width}
-															height={img.height}
-															alt={`${project.name} — ${i + 1}`}
-															loading="lazy"
-															decoding="async"
-															class="project-gallery-img"
-														/>
-													))}
+										<!-- Cada projeto é a sua própria gaveta (nível 2) -->
+										<details class="project-drawer">
+											<summary class="project-summary">
+												<div class="flex-1 min-w-0">
+													<div class="flex flex-wrap items-center gap-x-2.5 gap-y-1">
+														<h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">{project.name}</h3>
+														<span class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium" data-en={project.date.en} data-es={project.date.es} data-pt={project.date.pt}>
+															{project.date.pt}
+														</span>
+													</div>
 												</div>
-											)}
-											<div class="p-5 sm:p-6">
-												<h3 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-2">{project.name}</h3>
-												<p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed" data-en={project.description.en} data-es={project.description.es} data-pt={project.description.pt}>
+												<svg class="chevron-icon flex-shrink-0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+													<polyline points="6 9 12 15 18 9"></polyline>
+												</svg>
+											</summary>
+
+											<div class="project-content">
+												{project.images.length > 0 && (
+													<div class="project-gallery">
+														{project.images.map((img, i) => (
+															<img
+																src={img.src}
+																width={img.width}
+																height={img.height}
+																alt={`${project.name} — ${i + 1}`}
+																loading="lazy"
+																decoding="async"
+																class="project-gallery-img"
+															/>
+														))}
+													</div>
+												)}
+												<p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed mt-3" data-en={project.description.en} data-es={project.description.es} data-pt={project.description.pt}>
 													{project.description.pt}
 												</p>
 												{project.link && (
@@ -181,11 +197,9 @@ const categories = [
 													</a>
 												)}
 											</div>
-										</article>
+										</details>
 									))}
 								</div>
-							) : (
-								<div class="pt-2 pb-1"></div>
 							)}
 						</div>
 					</details>
@@ -212,6 +226,7 @@ const categories = [
 <style>
 	@reference "../styles/global.css";
 
+	/* Gaveta de categoria (nível 1) */
 	.category-drawer {
 		border: 1px solid rgb(229 231 235);
 		border-radius: 1rem;
@@ -242,11 +257,13 @@ const categories = [
 		list-style: none;
 	}
 
-	.category-summary::-webkit-details-marker {
+	.category-summary::-webkit-details-marker,
+	.project-summary::-webkit-details-marker {
 		display: none;
 	}
 
-	.category-summary::marker {
+	.category-summary::marker,
+	.project-summary::marker {
 		content: '';
 	}
 
@@ -256,7 +273,7 @@ const categories = [
 		transition: transform 0.3s ease;
 	}
 
-	details[open] > .category-summary .chevron-icon {
+	details[open] > summary .chevron-icon {
 		transform: rotate(180deg);
 	}
 
@@ -275,8 +292,44 @@ const categories = [
 		}
 	}
 
-	details[open] > .category-content {
+	details[open] > .category-content,
+	details[open] > .project-content {
 		animation: drawer-open 0.25s ease;
+	}
+
+	/* Gaveta de projeto (nível 2) */
+	.project-drawer {
+		border: 1px solid rgb(229 231 235);
+		border-radius: 0.85rem;
+		overflow: hidden;
+		background: rgb(249 250 251);
+		transition: border-color 0.2s ease;
+	}
+
+	:global(html.dark) .project-drawer {
+		border-color: rgb(55 65 81);
+		background: rgb(17 24 39 / 0.5);
+	}
+
+	.project-drawer:hover {
+		border-color: rgb(156 163 175);
+	}
+
+	:global(html.dark) .project-drawer:hover {
+		border-color: rgb(107 114 128);
+	}
+
+	.project-summary {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 0.85rem 1rem;
+		cursor: pointer;
+		list-style: none;
+	}
+
+	.project-content {
+		padding: 0 1rem 1rem 1rem;
 	}
 
 	.project-gallery {
@@ -284,13 +337,8 @@ const categories = [
 		gap: 0.5rem;
 		overflow-x: auto;
 		scroll-snap-type: x mandatory;
-		padding: 0.5rem;
-		background: rgb(243 244 246);
+		padding: 0.5rem 0;
 		-webkit-overflow-scrolling: touch;
-	}
-
-	:global(html.dark) .project-gallery {
-		background: rgb(17 24 39);
 	}
 
 	.project-gallery::-webkit-scrollbar {
