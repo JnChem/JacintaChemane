@@ -8,7 +8,10 @@ const translations = {
 	title: { en: 'Projects', es: 'Proyectos', pt: 'Projetos' },
 	description: { en: 'A collection of projects showcasing my skills in full-stack development.', es: 'Una colección de proyectos que muestran mis habilidades en desarrollo full-stack.', pt: 'Uma coleção de projetos que mostram as minhas competências em desenvolvimento full-stack.' },
 	comingSoon: { en: 'Coming soon', es: 'Próximamente', pt: 'Em breve' },
-	viewProject: { en: 'View on itch.io', es: 'Ver en itch.io', pt: 'Ver no itch.io' }
+	viewProject: { en: 'View on itch.io', es: 'Ver en itch.io', pt: 'Ver no itch.io' },
+	features: { en: 'Key features', es: 'Funcionalidades principales', pt: 'Funcionalidades principais' },
+	projectCount: { en: 'project', es: 'proyecto', pt: 'projeto' },
+	projectCountPlural: { en: 'projects', es: 'proyectos', pt: 'projetos' }
 };
 
 // Carrega automaticamente todas as imagens das pastas de cada projeto
@@ -20,10 +23,12 @@ const clagImages = Object.values(
 	import.meta.glob<{ default: ImageMetadata }>('../assets/projects/code-like-a-girl/*.{png,jpg,jpeg,webp,avif}', { eager: true })
 ).map((img) => img.default);
 
+// Paleta de destaque por categoria — usada na borda, ícone e badge
 const categories = [
 	{
 		id: 'game-dev',
 		icon: '🎮',
+		accent: 'violet',
 		title: { en: 'Game Development', es: 'Desarrollo de Juegos', pt: 'Desenvolvimento de Jogos' },
 		description: {
 			en: 'Interactive games and playful experiments, focused on game logic, mechanics and user experience.',
@@ -35,17 +40,65 @@ const categories = [
 				name: 'Bow Battles',
 				link: 'https://itch.io',
 				images: bowBattlesImages,
-				description: {
-					en: '2D fantasy game with 12 stages where the goal is to defeat the bosses. Includes a shop, menu, level system, sound system, 9 purchasable characters, movement, attack and revive mechanics. Released on itch.io.',
-					es: 'Juego de fantasía 2D con 12 niveles cuyo objetivo es derrotar a los jefes. Incluye tienda, menú, sistema de niveles, sistema de sonido, 9 personajes comprables, movimiento, ataque y mecánica de resurrección. Publicado en itch.io.',
-					pt: 'Jogo 2D de fantasia com 12 níveis, cujo objetivo é derrotar os bosses. Inclui loja, menu, sistema de níveis, sistema de som, 9 personagens compráveis, movimentação, ataque e sistema de reviver. Lançado no itch.io.'
-				}
+				summary: {
+					en: '2D fantasy action game built around progression and combat, released on itch.io.',
+					es: 'Juego de acción de fantasía en 2D centrado en la progresión y el combate, publicado en itch.io.',
+					pt: 'Jogo de ação e fantasia em 2D centrado em progressão e combate, lançado no itch.io.'
+				},
+				features: [
+					{
+						en: '12 stages, each culminating in a boss fight that raises the difficulty and tests the skills learned so far.',
+						es: '12 niveles, cada uno culminando en una batalla contra un jefe que aumenta la dificultad y pone a prueba las habilidades adquiridas.',
+						pt: '12 fases, cada uma culminando num combate contra um boss, que aumenta a dificuldade e testa as habilidades aprendidas até então.'
+					},
+					{
+						en: 'In-game shop where players spend earned currency on upgrades and cosmetic items.',
+						es: 'Tienda dentro del juego donde los jugadores gastan la moneda obtenida en mejoras y artículos cosméticos.',
+						pt: 'Loja dentro do jogo, onde os jogadores gastam moeda conquistada em melhorias e itens cosméticos.'
+					},
+					{
+						en: 'Full navigation menu covering stage selection, character selection and settings.',
+						es: 'Menú de navegación completo que cubre la selección de niveles, la selección de personajes y los ajustes.',
+						pt: 'Menu de navegação completo, cobrindo seleção de fases, seleção de personagens e definições.'
+					},
+					{
+						en: 'Level and progression system that tracks the player\'s advancement across the 12 stages.',
+						es: 'Sistema de niveles y progresión que registra el avance del jugador a lo largo de los 12 niveles.',
+						pt: 'Sistema de níveis e progressão, que regista o avanço do jogador ao longo das 12 fases.'
+					},
+					{
+						en: 'Dedicated sound system with background music and sound effects tied to combat and menu actions.',
+						es: 'Sistema de sonido dedicado, con música de fondo y efectos de sonido asociados al combate y a las acciones del menú.',
+						pt: 'Sistema de som dedicado, com música de fundo e efeitos sonoros associados ao combate e às ações do menu.'
+					},
+					{
+						en: '9 playable characters available for purchase, each adding variety to combat style.',
+						es: '9 personajes jugables disponibles para comprar, cada uno aportando variedad al estilo de combate.',
+						pt: '9 personagens jogáveis disponíveis para compra, cada um trazendo variedade ao estilo de combate.'
+					},
+					{
+						en: 'Free-roam 2D movement system with responsive controls across all stages.',
+						es: 'Sistema de movimiento libre en 2D con controles receptivos en todos los niveles.',
+						pt: 'Sistema de movimentação livre em 2D, com controlos responsivos em todas as fases.'
+					},
+					{
+						en: 'Attack mechanics with distinct actions per character, balanced against enemy and boss patterns.',
+						es: 'Mecánica de ataque con acciones distintas por personaje, equilibrada frente a los patrones de enemigos y jefes.',
+						pt: 'Mecânica de ataque com ações distintas por personagem, equilibrada face aos padrões de inimigos e bosses.'
+					},
+					{
+						en: 'Revive system that gives the player a second chance mid-stage instead of restarting from zero.',
+						es: 'Sistema de resurrección que le da al jugador una segunda oportunidad a mitad de nivel en lugar de reiniciar desde cero.',
+						pt: 'Sistema de reviver, que dá ao jogador uma segunda oportunidade a meio da fase, em vez de reiniciar do zero.'
+					}
+				]
 			}
 		]
 	},
 	{
 		id: 'backend',
 		icon: '🗄️',
+		accent: 'sky',
 		title: { en: 'Backend', es: 'Backend', pt: 'Backend' },
 		description: {
 			en: 'APIs, databases and server-side logic, with attention to structure, security and performance.',
@@ -57,6 +110,7 @@ const categories = [
 	{
 		id: 'web-design',
 		icon: '🎨',
+		accent: 'rose',
 		title: { en: 'Web Design', es: 'Diseño Web', pt: 'Web Design' },
 		description: {
 			en: 'Interface and layout work, focused on clean visuals, readability and responsive design.',
@@ -68,6 +122,7 @@ const categories = [
 	{
 		id: 'fullstack',
 		icon: '⚙️',
+		accent: 'amber',
 		title: { en: 'Full Stack', es: 'Full Stack', pt: 'Full Stack' },
 		description: {
 			en: 'End-to-end applications, from the interface to the database, built as complete working solutions.',
@@ -79,6 +134,7 @@ const categories = [
 	{
 		id: 'volunteering',
 		icon: '🤝',
+		accent: 'emerald',
 		title: { en: 'Volunteering', es: 'Voluntariado', pt: 'Voluntariado' },
 		description: {
 			en: 'Community and educational initiatives, including teaching, outreach and technology awareness activities.',
@@ -90,15 +146,45 @@ const categories = [
 				name: 'Code Like A Girl',
 				link: null,
 				images: clagImages,
-				description: {
-					en: 'Volunteer programming trainer for young girls, teaching coding fundamentals and adapting explanations to each participant\'s pace, encouraging confidence and interest in technology.',
-					es: 'Formadora voluntaria de programación para niñas, enseñando los fundamentos de la programación y adaptando las explicaciones al ritmo de cada participante, fomentando la confianza y el interés por la tecnología.',
-					pt: 'Formadora voluntária de programação para meninas, ensinando fundamentos de código e adaptando as explicações ao ritmo de cada participante, incentivando a confiança e o interesse pela tecnologia.'
-				}
+				summary: {
+					en: 'Volunteer initiative teaching programming fundamentals to young girls.',
+					es: 'Iniciativa voluntaria que enseña los fundamentos de la programación a niñas.',
+					pt: 'Iniciativa voluntária de ensino de fundamentos de programação a meninas.'
+				},
+				features: [
+					{
+						en: 'Delivered hands-on sessions covering programming fundamentals, from basic logic to first lines of code.',
+						es: 'Impartí sesiones prácticas sobre los fundamentos de la programación, desde la lógica básica hasta las primeras líneas de código.',
+						pt: 'Dei sessões práticas sobre fundamentos de programação, desde lógica básica até às primeiras linhas de código.'
+					},
+					{
+						en: 'Adapted explanations and pace individually to each participant\'s prior experience and learning speed.',
+						es: 'Adapté las explicaciones y el ritmo de forma individual a la experiencia previa y la velocidad de aprendizaje de cada participante.',
+						pt: 'Adaptei explicações e ritmo individualmente à experiência prévia e à velocidade de aprendizagem de cada participante.'
+					},
+					{
+						en: 'Encouraged confidence and curiosity about technology among girls, in a field where they remain underrepresented.',
+						es: 'Fomenté la confianza y la curiosidad por la tecnología entre las niñas, en un campo donde aún están subrepresentadas.',
+						pt: 'Incentivei a confiança e a curiosidade pela tecnologia junto das meninas, num campo onde ainda estão sub-representadas.'
+					},
+					{
+						en: 'Supported participants beyond the sessions, answering questions and encouraging continued practice.',
+						es: 'Apoyé a las participantes más allá de las sesiones, respondiendo preguntas y fomentando la práctica continua.',
+						pt: 'Acompanhei as participantes para além das sessões, tirando dúvidas e incentivando a prática contínua.'
+					}
+				]
 			}
 		]
 	}
 ];
+
+const accentClasses: Record<string, { border: string; bg: string; text: string; badgeBg: string; badgeText: string }> = {
+	violet: { border: 'border-violet-300 dark:border-violet-800', bg: 'bg-violet-50 dark:bg-violet-950/40', text: 'text-violet-700 dark:text-violet-300', badgeBg: 'bg-violet-100 dark:bg-violet-900/60', badgeText: 'text-violet-700 dark:text-violet-300' },
+	sky: { border: 'border-sky-300 dark:border-sky-800', bg: 'bg-sky-50 dark:bg-sky-950/40', text: 'text-sky-700 dark:text-sky-300', badgeBg: 'bg-sky-100 dark:bg-sky-900/60', badgeText: 'text-sky-700 dark:text-sky-300' },
+	rose: { border: 'border-rose-300 dark:border-rose-800', bg: 'bg-rose-50 dark:bg-rose-950/40', text: 'text-rose-700 dark:text-rose-300', badgeBg: 'bg-rose-100 dark:bg-rose-900/60', badgeText: 'text-rose-700 dark:text-rose-300' },
+	amber: { border: 'border-amber-300 dark:border-amber-800', bg: 'bg-amber-50 dark:bg-amber-950/40', text: 'text-amber-700 dark:text-amber-300', badgeBg: 'bg-amber-100 dark:bg-amber-900/60', badgeText: 'text-amber-700 dark:text-amber-300' },
+	emerald: { border: 'border-emerald-300 dark:border-emerald-800', bg: 'bg-emerald-50 dark:bg-emerald-950/40', text: 'text-emerald-700 dark:text-emerald-300', badgeBg: 'bg-emerald-100 dark:bg-emerald-900/60', badgeText: 'text-emerald-700 dark:text-emerald-300' }
+};
 ---
 
 <Layout title="Projects | Jacinta Chemane">
@@ -116,75 +202,119 @@ const categories = [
 				</p>
 			</div>
 
-			<!-- Categorias -->
-			<div class="space-y-10 sm:space-y-14">
-				{categories.map((cat) => (
-					<div id={cat.id} class="scroll-mt-28">
-						<!-- Cabeçalho da categoria -->
-						<div class="flex items-start gap-3 mb-4 sm:mb-5 pb-3 border-b border-gray-200 dark:border-gray-700">
-							<span class="text-2xl sm:text-3xl flex-shrink-0" aria-hidden="true">{cat.icon}</span>
-							<div class="flex-1">
-								<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5">
-									<h2 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white" data-en={cat.title.en} data-es={cat.title.es} data-pt={cat.title.pt}>
-										{cat.title.pt}
-									</h2>
-									{cat.projects.length === 0 && (
-										<span class="text-[10px] sm:text-xs font-medium px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 w-fit whitespace-nowrap" data-en={translations.comingSoon.en} data-es={translations.comingSoon.es} data-pt={translations.comingSoon.pt}>
-											{translations.comingSoon.pt}
-										</span>
-									)}
-								</div>
-								<p class="mt-1 text-xs sm:text-sm text-gray-600 dark:text-gray-400 leading-relaxed" data-en={cat.description.en} data-es={cat.description.es} data-pt={cat.description.pt}>
-									{cat.description.pt}
-								</p>
-							</div>
-						</div>
+			<!-- Índice rápido de categorias -->
+			<nav class="flex flex-wrap gap-2 mb-12 sm:mb-16" aria-label="Categorias de projetos">
+				{categories.map((cat) => {
+					const a = accentClasses[cat.accent];
+					return (
+						<a href={`#${cat.id}`} class={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border ${a.border} ${a.bg} ${a.text} text-xs sm:text-sm font-medium hover:opacity-80 transition-opacity`}>
+							<span aria-hidden="true">{cat.icon}</span>
+							<span data-en={cat.title.en} data-es={cat.title.es} data-pt={cat.title.pt}>{cat.title.pt}</span>
+						</a>
+					);
+				})}
+			</nav>
 
-						<!-- Projetos da categoria -->
-						{cat.projects.length > 0 && (
-							<div class="space-y-6">
-								{cat.projects.map((project) => (
-									<article class="group border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden hover:border-gray-400 dark:hover:border-gray-500 hover:shadow-lg transition-all">
-										{project.images.length > 0 && (
-											<div class="project-gallery">
-												{project.images.map((img, i) => (
-													<img
-														src={img.src}
-														width={img.width}
-														height={img.height}
-														alt={`${project.name} — ${i + 1}`}
-														loading="lazy"
-														decoding="async"
-														class="project-gallery-img"
-													/>
-												))}
-											</div>
-										)}
-										<div class="p-5 sm:p-6">
-											<h3 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-2">{project.name}</h3>
-											<p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed" data-en={project.description.en} data-es={project.description.es} data-pt={project.description.pt}>
-												{project.description.pt}
-											</p>
-											{project.link && (
-												<a
-													href={project.link}
-													target="_blank"
-													rel="noopener noreferrer"
-													class="animated-border inline-flex items-center gap-2 mt-4 px-4 py-2 text-sm font-medium border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-													data-en={translations.viewProject.en}
-													data-es={translations.viewProject.es}
-													data-pt={translations.viewProject.pt}
-												>
-													{translations.viewProject.pt}
-												</a>
-											)}
+			<!-- Categorias -->
+			<div class="space-y-14 sm:space-y-20">
+				{categories.map((cat) => {
+					const a = accentClasses[cat.accent];
+					const count = cat.projects.length;
+					return (
+						<div id={cat.id} class="scroll-mt-28">
+							<!-- Cabeçalho da categoria, com cor de destaque própria -->
+							<div class={`relative rounded-2xl border-2 ${a.border} ${a.bg} p-5 sm:p-7 mb-6 sm:mb-8`}>
+								<div class="flex items-start gap-4">
+									<span class={`text-3xl sm:text-4xl flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center ${a.badgeBg}`} aria-hidden="true">
+										{cat.icon}
+									</span>
+									<div class="flex-1 min-w-0">
+										<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+											<h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white" data-en={cat.title.en} data-es={cat.title.es} data-pt={cat.title.pt}>
+												{cat.title.pt}
+											</h2>
+											<span class={`text-[10px] sm:text-xs font-semibold px-3 py-1 rounded-full ${a.badgeBg} ${a.badgeText} w-fit whitespace-nowrap uppercase tracking-wide`}>
+												{count === 0 ? (
+													<span data-en={translations.comingSoon.en} data-es={translations.comingSoon.es} data-pt={translations.comingSoon.pt}>{translations.comingSoon.pt}</span>
+												) : (
+													<Fragment>
+														{count} {count === 1 ? (
+															<span data-en={translations.projectCount.en} data-es={translations.projectCount.es} data-pt={translations.projectCount.pt}>{translations.projectCount.pt}</span>
+														) : (
+															<span data-en={translations.projectCountPlural.en} data-es={translations.projectCountPlural.es} data-pt={translations.projectCountPlural.pt}>{translations.projectCountPlural.pt}</span>
+														)}
+													</Fragment>
+												)}
+											</span>
 										</div>
-									</article>
-								))}
+										<p class="mt-2 text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed" data-en={cat.description.en} data-es={cat.description.es} data-pt={cat.description.pt}>
+											{cat.description.pt}
+										</p>
+									</div>
+								</div>
 							</div>
-						)}
-					</div>
-				))}
+
+							<!-- Projetos da categoria -->
+							{cat.projects.length > 0 && (
+								<div class="space-y-6 sm:space-y-8 pl-0 sm:pl-4">
+									{cat.projects.map((project) => (
+										<article class={`group border-2 ${a.border} rounded-2xl overflow-hidden hover:shadow-xl transition-all bg-white dark:bg-gray-900`}>
+											{project.images.length > 0 && (
+												<div class="project-gallery">
+													{project.images.map((img, i) => (
+														<img
+															src={img.src}
+															width={img.width}
+															height={img.height}
+															alt={`${project.name} — ${i + 1}`}
+															loading="lazy"
+															decoding="async"
+															class="project-gallery-img"
+														/>
+													))}
+												</div>
+											)}
+											<div class="p-5 sm:p-7">
+												<h3 class="text-lg sm:text-2xl font-bold text-gray-900 dark:text-white mb-1.5">{project.name}</h3>
+												<p class={`text-sm sm:text-base font-medium mb-4 ${a.text}`} data-en={project.summary.en} data-es={project.summary.es} data-pt={project.summary.pt}>
+													{project.summary.pt}
+												</p>
+
+												<h4 class="text-xs sm:text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-3" data-en={translations.features.en} data-es={translations.features.es} data-pt={translations.features.pt}>
+													{translations.features.pt}
+												</h4>
+												<ul class="space-y-2.5">
+													{project.features.map((feature) => (
+														<li class="flex items-start gap-2.5">
+															<span class={`mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0 ${a.badgeBg}`} aria-hidden="true"></span>
+															<span class="text-sm sm:text-base text-gray-600 dark:text-gray-400 leading-relaxed" data-en={feature.en} data-es={feature.es} data-pt={feature.pt}>
+																{feature.pt}
+															</span>
+														</li>
+													))}
+												</ul>
+
+												{project.link && (
+													<a
+														href={project.link}
+														target="_blank"
+														rel="noopener noreferrer"
+														class={`inline-flex items-center gap-2 mt-6 px-4 py-2 text-sm font-semibold rounded-full ${a.badgeBg} ${a.badgeText} hover:opacity-80 transition-opacity`}
+														data-en={translations.viewProject.en}
+														data-es={translations.viewProject.es}
+														data-pt={translations.viewProject.pt}
+													>
+														{translations.viewProject.pt}
+													</a>
+												)}
+											</div>
+										</article>
+									))}
+								</div>
+							)}
+						</div>
+					);
+				})}
 			</div>
 		</section>
 	</main>
@@ -212,7 +342,7 @@ const categories = [
 		gap: 0.5rem;
 		overflow-x: auto;
 		scroll-snap-type: x mandatory;
-		padding: 0.5rem;
+		padding: 0.75rem;
 		background: rgb(243 244 246);
 		-webkit-overflow-scrolling: touch;
 	}
@@ -232,8 +362,8 @@ const categories = [
 
 	.project-gallery-img {
 		flex: 0 0 auto;
-		width: 15rem;
-		height: 10rem;
+		width: 16rem;
+		height: 10.5rem;
 		object-fit: cover;
 		border-radius: 0.75rem;
 		scroll-snap-align: start;
@@ -246,8 +376,8 @@ const categories = [
 
 	@media (max-width: 640px) {
 		.project-gallery-img {
-			width: 12rem;
-			height: 8rem;
+			width: 13rem;
+			height: 8.5rem;
 		}
 	}
 </style>
