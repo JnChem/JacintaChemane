@@ -19,6 +19,10 @@ const clagImages = Object.values(
 	import.meta.glob<{ default: ImageMetadata }>('../assets/projects/code-like-a-girl/*.{png,jpg,jpeg,webp,avif}', { eager: true })
 ).map((img) => img.default);
 
+const silImages = Object.values(
+	import.meta.glob<{ default: ImageMetadata }>('../assets/projects/sil/*.{png,jpg,jpeg,webp,avif}', { eager: true })
+).map((img) => img.default);
+
 const categories = [
 	{
 		id: 'game-dev',
@@ -81,7 +85,28 @@ const categories = [
 			es: 'Aplicaciones completas, desde la interfaz hasta la base de datos.',
 			pt: 'Aplicações completas, da interface à base de dados.'
 		},
-		projects: []
+		projects: [
+			{
+				name: 'SIL — Plataforma de Localização',
+				date: { en: '2025', es: '2025', pt: '2025' },
+				link: null,
+				images: silImages,
+				intro: {
+					en: 'Localization Platform for Public and Family Safety, an academic project researching technological solutions to support safety in Mozambique. Provides an efficient real-time location system focused on preventing and responding to risk situations, letting friends and family track location, receive emergency alerts and check frequent places. Developed as a final course project (Trabalho de Conclusão de Curso) in 2025.',
+					es: 'Plataforma de Localización para la Seguridad Pública y Familiar, un proyecto académico de investigación sobre soluciones tecnológicas para apoyar la seguridad en Mozambique. Ofrece un sistema eficiente de localización en tiempo real, centrado en prevenir y responder a situaciones de riesgo, permitiendo que amigos y familiares sigan la ubicación, reciban alertas de emergencia y consulten lugares frecuentes. Desarrollado como proyecto final de curso en 2025.',
+					pt: 'Plataforma de Localização - Segurança Pública e Familiar, um projeto académico desenvolvido no âmbito da pesquisa sobre soluções tecnológicas para apoio à segurança em Moçambique. Disponibiliza um sistema eficiente de localização em tempo real, focado em prevenir e responder a situações de risco, permitindo que amigos e familiares acompanhem a localização, recebam alertas de emergência e consultem locais frequentes. Desenvolvido como Trabalho de Conclusão de Curso em 2025.'
+				},
+				featuresLabel: { en: 'Main features:', es: 'Funcionalidades principales:', pt: 'Funcionalidades principais:' },
+				features: [
+					{ en: 'Real-time location monitoring', es: 'Monitoreo de ubicación en tiempo real', pt: 'Monitoramento de localização em tempo real' },
+					{ en: 'Panic button with emergency alerts', es: 'Botón de pánico y envío de alertas de emergencia', pt: 'Botão de pânico e envio de alertas emergenciais' },
+					{ en: 'Location history', es: 'Historial de ubicaciones', pt: 'Histórico de localizações' },
+					{ en: 'Profile and authorized contact management', es: 'Gestión de perfiles y contactos autorizados', pt: 'Gestão de perfis e contatos autorizados' }
+				],
+				techLabel: { en: 'Tech stack:', es: 'Tecnologías:', pt: 'Tecnologias:' },
+				tech: ['React', 'Leaflet', 'Bootstrap', 'Node.js', 'Express', 'PHP', 'MySQL']
+			}
+		]
 	},
 	{
 		id: 'volunteering',
@@ -196,6 +221,18 @@ const categories = [
 															<li data-en={feature.en} data-es={feature.es} data-pt={feature.pt}>{feature.pt}</li>
 														))}
 													</ul>
+												</div>
+											)}
+											{project.tech && project.tech.length > 0 && (
+												<div class="mt-3">
+													<p class="text-sm sm:text-base font-semibold text-gray-900 dark:text-white mb-1.5" data-en={project.techLabel.en} data-es={project.techLabel.es} data-pt={project.techLabel.pt}>
+														{project.techLabel.pt}
+													</p>
+													<div class="tech-tags">
+														{project.tech.map((t) => (
+															<span class="tech-tag">{t}</span>
+														))}
+													</div>
 												</div>
 											)}
 											{project.link && (
@@ -324,6 +361,26 @@ const categories = [
 		.feature-list {
 			font-size: 1rem;
 		}
+	}
+
+	.tech-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
+	}
+
+	.tech-tag {
+		font-size: 0.75rem;
+		font-weight: 500;
+		padding: 0.25rem 0.65rem;
+		border-radius: 9999px;
+		background: rgb(229 231 235);
+		color: rgb(55 65 81);
+	}
+
+	:global(html.dark) .tech-tag {
+		background: rgb(55 65 81);
+		color: rgb(209 213 219);
 	}
 
 	.project-gallery {
