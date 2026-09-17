@@ -43,9 +43,9 @@ const categories = [
 				link: 'https://jncstudios.itch.io/bow-battles',
 				images: bowBattlesImages,
 				intro: {
-					en: '2D fantasy game with 12 stages, where the goal is to defeat the boss of each stage. Released on itch.io.',
-					es: 'Juego de fantasía 2D con 12 niveles, cuyo objetivo es derrotar al jefe de cada nivel. Publicado en itch.io.',
-					pt: 'Jogo 2D de fantasia com 12 níveis, cujo objetivo é derrotar o boss de cada nível. Lançado no itch.io.'
+					en: '2D fantasy game with 12 stages, where the goal is to defeat the boss of each stage. Built with C# in Unity. Released on itch.io.',
+					es: 'Juego de fantasía 2D con 12 niveles, cuyo objetivo es derrotar al jefe de cada nivel. Desarrollado con C# en Unity. Publicado en itch.io.',
+					pt: 'Jogo 2D de fantasia com 12 níveis, cujo objetivo é derrotar o boss de cada nível. Desenvolvido com C# em Unity. Lançado no itch.io.'
 				},
 				featuresLabel: { en: 'Features:', es: 'Funcionalidades:', pt: 'Funcionalidades:' },
 				features: [
@@ -56,7 +56,9 @@ const categories = [
 					{ en: '9 purchasable characters', es: '9 personajes comprables', pt: '9 personagens compráveis' },
 					{ en: 'Movement', es: 'Movimiento', pt: 'Movimentação' },
 					{ en: 'Attack', es: 'Ataque', pt: 'Ataque' },
-					{ en: 'Revive mechanic', es: 'Mecánica de resurrección', pt: 'Sistema de reviver' }
+					{ en: 'Revive mechanic', es: 'Mecánica de resurrección', pt: 'Sistema de reviver' },
+					{ en: 'Audio integration', es: 'Integración de audio', pt: 'Integração de áudio' },
+					{ en: 'UI built with templates', es: 'UI construida con plantillas', pt: 'UI construída com templates' }
 				]
 			}
 		]
@@ -111,7 +113,7 @@ const categories = [
 		},
 		projects: [
 			{
-				name: 'SIL: Plataforma de Localização',
+				name: 'SIL — Plataforma de Localização',
 				date: { en: '2025', es: '2025', pt: '2025' },
 				link: null,
 				images: silImages,
@@ -147,15 +149,16 @@ const categories = [
 				link: null,
 				images: clagImages,
 				intro: {
-					en: 'Volunteer trainer for the Code Like A Girl program by Moz Devz, teaching young girls with no prior contact with technology.',
-					es: 'Formadora voluntaria en el programa Code Like A Girl por Moz Devz, enseñando a niñas sin contacto previo con la tecnología.',
-					pt: 'Formadora voluntária no programa Code Like A Girl da Moz Devz, ensinando meninas sem contacto prévio com a tecnologia.'
+					en: 'Volunteer trainer for the Code Like A Girl program by Moz Devz, sponsored by Vodacom Moçambique, teaching young girls with no prior contact with technology.',
+					es: 'Formadora voluntaria en el programa Code Like A Girl por Moz Devz, patrocinado por Vodacom Mozambique, enseñando a niñas sin contacto previo con la tecnología.',
+					pt: 'Formadora voluntária no programa Code Like A Girl da Moz Devz, patrocinado pela Vodacom Moçambique, ensinando meninas sem contacto prévio com a tecnologia.'
 				},
 				featuresLabel: { en: 'What I did:', es: 'Lo que hice:', pt: 'O que fiz:' },
 				features: [
 					{ en: 'Taught computing fundamentals, the Internet, client-server architecture and the Internet of Things', es: 'Impartí fundamentos de informática, Internet, arquitectura cliente-servidor e Internet de las Cosas', pt: 'Leccionei módulos de informática, Internet, arquitetura cliente-servidor e Internet das Coisas' },
 					{ en: 'Delivered cybersecurity training for safe and conscious online navigation', es: 'Formación en ciberseguridad para una navegación online segura y consciente', pt: 'Formação em segurança cibernética para navegação online consciente e protegida' },
-					{ en: 'Introduced web development with HTML for first digital projects', es: 'Introduje desarrollo web con HTML para los primeros proyectos digitales', pt: 'Introdução ao desenvolvimento web com HTML para os primeiros projetos digitais' },
+					{ en: 'Introduced web development with HTML, CSS and JavaScript', es: 'Introduje desarrollo web con HTML, CSS y JavaScript', pt: 'Introdução ao desenvolvimento web com HTML, CSS e JavaScript' },
+					{ en: 'Taught UX/UI basics', es: 'Enseñé fundamentos de UX/UI', pt: 'Ensinei fundamentos de UX/UI' },
 					{ en: 'Designed and adapted teaching materials for beginners', es: 'Diseño y adaptación de materiales didácticos para principiantes', pt: 'Conceção e adaptação de conteúdos didáticos para iniciantes' },
 					{ en: 'Coordinated practical sessions with another trainer', es: 'Coordinación de sesiones prácticas junto a otro formador', pt: 'Coordenação de sessões práticas em conjunto com outro formador' }
 				]
@@ -179,7 +182,7 @@ const categories = [
 				</p>
 			</div>
 
-			<!-- Categorias -->
+			<!-- Categorias: títulos simples, sempre visíveis -->
 			<div class="space-y-10 sm:space-y-14">
 				{categories.map((cat) => (
 					<div id={cat.id} class="scroll-mt-28">
@@ -197,7 +200,7 @@ const categories = [
 							{cat.description.pt}
 						</p>
 
-						<!-- Projetos -->
+						<!-- Projetos: cada um é uma gaveta expansível -->
 						{cat.projects.length > 0 && (
 							<div class="space-y-3">
 								{cat.projects.map((project) => (
