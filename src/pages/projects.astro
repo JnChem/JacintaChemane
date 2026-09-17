@@ -23,6 +23,10 @@ const silImages = Object.values(
 	import.meta.glob<{ default: ImageMetadata }>('../assets/projects/sil/*.{png,jpg,jpeg,webp,avif}', { eager: true })
 ).map((img) => img.default);
 
+const silBackendImages = Object.values(
+	import.meta.glob<{ default: ImageMetadata }>('../assets/projects/MySQL/*.{png,jpg,jpeg,webp,avif}', { eager: true })
+).map((img) => img.default);
+
 const categories = [
 	{
 		id: 'game-dev',
@@ -65,7 +69,27 @@ const categories = [
 			es: 'APIs y bases de datos.',
 			pt: 'APIs e bases de dados.'
 		},
-		projects: []
+		projects: [
+			{
+				name: 'SIL — Base de Dados e API',
+				date: { en: '2025', es: '2025', pt: '2025' },
+				link: null,
+				images: silBackendImages,
+				intro: {
+					en: 'Database and API design for the SIL platform, structuring the data behind user accounts, real-time locations, emergency alerts and authorized contacts.',
+					es: 'Diseño de base de datos y API para la plataforma SIL, estructurando los datos detrás de las cuentas de usuario, ubicaciones en tiempo real, alertas de emergencia y contactos autorizados.',
+					pt: 'Conceção da base de dados e da API da plataforma SIL, estruturando os dados por trás das contas de utilizador, localizações em tempo real, alertas de emergência e contactos autorizados.'
+				},
+				featuresLabel: { en: 'What it includes:', es: 'Lo que incluye:', pt: 'O que inclui:' },
+				features: [
+					{ en: 'Relational schema for users, locations, SOS alerts, contacts and profiles', es: 'Esquema relacional para usuarios, ubicaciones, alertas SOS, contactos y perfiles', pt: 'Esquema relacional para utilizadores, localizações, alertas SOS, contactos e perfis' },
+					{ en: 'REST API endpoints for authentication, location tracking and emergency alerts', es: 'Endpoints de API REST para autenticación, seguimiento de ubicación y alertas de emergencia', pt: 'Endpoints de API REST para autenticação, rastreio de localização e alertas de emergência' },
+					{ en: 'Password hashing and basic authentication logic', es: 'Hashing de contraseñas y lógica básica de autenticación', pt: 'Encriptação de passwords e lógica básica de autenticação' }
+				],
+				techLabel: { en: 'Tech stack:', es: 'Tecnologías:', pt: 'Tecnologias:' },
+				tech: ['MySQL', 'Node.js', 'Express', 'PHP']
+			}
+		]
 	},
 	{
 		id: 'web-design',
@@ -405,10 +429,15 @@ const categories = [
 		flex: 0 0 auto;
 		width: 15rem;
 		height: 10rem;
-		object-fit: cover;
+		object-fit: contain;
+		background: rgb(229 231 235);
 		border-radius: 0.75rem;
 		scroll-snap-align: start;
 		transition: transform 0.3s ease;
+	}
+
+	:global(html.dark) .project-gallery-img {
+		background: rgb(31 41 55);
 	}
 
 	.project-gallery-img:hover {
