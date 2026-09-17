@@ -24,7 +24,7 @@ const silImages = Object.values(
 ).map((img) => img.default);
 
 const silBackendImages = Object.values(
-	import.meta.glob<{ default: ImageMetadata }>('../assets/projects/MySQL/*.{png,jpg,jpeg,webp,avif}', { eager: true })
+	import.meta.glob<{ default: ImageMetadata }>('../assets/projects/mySQL/*.{png,jpg,jpeg,webp,avif}', { eager: true })
 ).map((img) => img.default);
 
 const categories = [
@@ -111,7 +111,7 @@ const categories = [
 		},
 		projects: [
 			{
-				name: 'SIL — Plataforma de Localização',
+				name: 'SIL: Plataforma de Localização',
 				date: { en: '2025', es: '2025', pt: '2025' },
 				link: null,
 				images: silImages,
@@ -179,7 +179,7 @@ const categories = [
 				</p>
 			</div>
 
-			<!-- Categorias: títulos simples, sempre visíveis -->
+			<!-- Categorias -->
 			<div class="space-y-10 sm:space-y-14">
 				{categories.map((cat) => (
 					<div id={cat.id} class="scroll-mt-28">
@@ -197,7 +197,7 @@ const categories = [
 							{cat.description.pt}
 						</p>
 
-						<!-- Projetos: cada um é uma gaveta expansível -->
+						<!-- Projetos -->
 						{cat.projects.length > 0 && (
 							<div class="space-y-3">
 								{cat.projects.map((project) => (
